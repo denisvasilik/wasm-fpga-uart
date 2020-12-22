@@ -93,7 +93,7 @@ HwSwIf WasmFpgaUart {
             HwConfiguration {
                 HwTypeSync = 'Yes';
                 HwAckImmediate = 'Yes';
-                HwAddWTransPulse = 'Yes';
+                HwAddWRegPulse = 'Yes';
             }
             Bits {
                 BitFieldReserved ( 31 downto 2 );

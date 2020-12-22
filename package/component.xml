@@ -195,7 +195,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>fe09854c</spirit:value>
+            <spirit:value>b426b530</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -216,7 +216,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>fe09854c</spirit:value>
+            <spirit:value>b426b530</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -452,6 +452,8 @@
       <spirit:file>
         <spirit:name>../tb/tb_WasmFpgaUart.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -463,28 +465,23 @@
       <spirit:file>
         <spirit:name>../src/uart_rx6.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../src/WasmFpgaUart.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../src/uart_tx6.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../resources/wasm_fpga_uart_header.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../resources/wasm_fpga_uart_wishbone.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_cdaaa915</spirit:userFileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+        <spirit:userFileType>CHECKSUM_cac09b6a</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -516,27 +513,22 @@
       <spirit:file>
         <spirit:name>../src/uart_rx6.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../src/WasmFpgaUart.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../src/uart_tx6.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../resources/wasm_fpga_uart_header.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../resources/wasm_fpga_uart_wishbone.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -577,8 +569,8 @@
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>WebAssembly UART IP</xilinx:displayName>
-      <xilinx:coreRevision>25</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2020-12-22T09:03:10Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>26</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2020-12-22T19:53:31Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@5cbed84e_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@19ee9aa4_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
@@ -660,12 +652,19 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@6b82b2d8_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@58ad28b_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@2bffbd3d_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1daf4f1b_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ad4e958_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4ddbc632_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e286a76_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2c76f4a3_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3658019c_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5e31a7b4_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2019.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="1ea0cf6e"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="dfdd3694"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="21fb47a7"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="d1e8a832"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="0fa54017"/>
     </xilinx:packagingInfo>

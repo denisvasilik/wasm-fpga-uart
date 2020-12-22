@@ -28,7 +28,7 @@ entity UartBlk_WasmFpgaUart is
         UartBlk_Unoccupied_Ack : out std_logic;
         UartRxRun : out std_logic;
         UartTxRun : out std_logic;
-        WTransPulse_ControlReg : out std_logic;
+        WRegPulse_ControlReg : out std_logic;
         UartRxDataPresent : in std_logic;
         UartRxBusy : in std_logic;
         UartTxBusy : in std_logic;
@@ -58,6 +58,7 @@ architecture arch_for_synthesys of UartBlk_WasmFpgaUart is
 
     signal WriteDiff_ControlReg : std_logic;
     signal ReadDiff_ControlReg : std_logic;
+     signal DelWriteDiff_ControlReg: std_logic;
 
 
     signal WriteDiff_StatusReg : std_logic;
@@ -159,10 +160,12 @@ begin
     reg_syn_clk_part_ControlReg0 : process (Clk, Rst)
     begin 
         if (Rst = '1') then 
+             DelWriteDiff_ControlReg <= '0'; 
             PreMuxAck_ControlReg <= '0';
             WReg_UartRxRun <= '0';
             WReg_UartTxRun <= '0';
         elsif rising_edge(Clk) then
+             DelWriteDiff_ControlReg <= WriteDiff_ControlReg;
             PreMuxAck_ControlReg <= WriteDiff_ControlReg or ReadDiff_ControlReg; 
             if (WriteDiff_ControlReg = '1') then
                 if (Sel(0) = '1') then WReg_UartRxRun <= DatIn(1); end if;
@@ -183,8 +186,8 @@ begin
     end process;
 
 
-    WTransPulse_ControlReg <= WriteDiff_ControlReg;
 
+    WRegPulse_ControlReg <= DelWriteDiff_ControlReg;
 
     UartRxRun <= WReg_UartRxRun;
     UartTxRun <= WReg_UartTxRun;
@@ -365,7 +368,7 @@ architecture arch_for_synthesys of WasmFpgaUartWshBn is
             UartBlk_Unoccupied_Ack : out std_logic;
             UartRxRun : out std_logic;
             UartTxRun : out std_logic;
-            WTransPulse_ControlReg : out std_logic;
+            WRegPulse_ControlReg : out std_logic;
             UartRxDataPresent : in std_logic;
             UartRxBusy : in std_logic;
             UartTxBusy : in std_logic;
@@ -403,7 +406,7 @@ begin
         UartBlk_Unoccupied_Ack => UartBlk_Unoccupied_Ack,
         UartRxRun => WasmFpgaUartWshBn_UartBlk.UartRxRun,
         UartTxRun => WasmFpgaUartWshBn_UartBlk.UartTxRun,
-        WTransPulse_ControlReg => WasmFpgaUartWshBn_UartBlk.WTransPulse_ControlReg,
+        WRegPulse_ControlReg => WasmFpgaUartWshBn_UartBlk.WRegPulse_ControlReg,
         UartRxDataPresent => UartBlk_WasmFpgaUartWshBn.UartRxDataPresent,
         UartRxBusy => UartBlk_WasmFpgaUartWshBn.UartRxBusy,
         UartTxBusy => UartBlk_WasmFpgaUartWshBn.UartTxBusy,

@@ -103,7 +103,7 @@ package WasmFpgaUartWshBn_Package is
     record
         UartRxRun :   std_logic;
         UartTxRun :   std_logic;
-        WTransPulse_ControlReg :   std_logic;
+        WRegPulse_ControlReg :   std_logic;
         TxDataByte :   std_logic_vector(7 downto 0);
         RxDataByte :   std_logic_vector(7 downto 0);
     end record;

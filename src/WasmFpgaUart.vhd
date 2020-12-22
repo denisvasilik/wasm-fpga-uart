@@ -142,7 +142,7 @@ architecture WasmFpgaUartDefault of WasmFpgaUart is
         UartBlk_Unoccupied_Ack : out std_logic;
         UartRxRun : out std_logic;
         UartTxRun : out std_logic;
-        WTransPulse_ControlReg : out std_logic;
+        WRegPulse_ControlReg : out std_logic;
         UartRxDataPresent : in std_logic;
         UartRxBusy : in std_logic;
         UartTxBusy : in std_logic;
@@ -328,7 +328,7 @@ begin
       UartBlk_Unoccupied_Ack => open,
       UartRxRun => UartRxRun,
       UartTxRun => UartTxRun,
-      WTransPulse_ControlReg => ControlRegPulse,
+      WRegPulse_ControlReg => ControlRegPulse,
       UartRxDataPresent => UartRxDataPresent,
       UartRxBusy => UartRxBusy,
       UartTxBusy => UartTxBusy,
