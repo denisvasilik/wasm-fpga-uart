@@ -167,7 +167,7 @@
         <spirit:name>xilinx_testbench</spirit:name>
         <spirit:displayName>Test Bench</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:simulation.testbench</spirit:envIdentifier>
-        <spirit:modelName>tb_WasmFpgaStack</spirit:modelName>
+        <spirit:modelName>tb_WasmFpgaUart</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_testbench_view_fileset</spirit:localName>
         </spirit:fileSetRef>
@@ -182,7 +182,7 @@
         <spirit:name>xilinx_anylanguagesynthesis</spirit:name>
         <spirit:displayName>Synthesis</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:synthesis</spirit:envIdentifier>
-        <spirit:modelName>WasmFpgaStack</spirit:modelName>
+        <spirit:modelName>WasmFpgaUart</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_anylanguagesynthesis_xilinx_com_ip_clk_wiz_6_0__ref_view_fileset</spirit:localName>
         </spirit:fileSetRef>
@@ -203,7 +203,7 @@
         <spirit:name>xilinx_anylanguagebehavioralsimulation</spirit:name>
         <spirit:displayName>Simulation</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:simulation</spirit:envIdentifier>
-        <spirit:modelName>WasmFpgaStack</spirit:modelName>
+        <spirit:modelName>WasmFpgaUart</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_anylanguagebehavioralsimulation_xilinx_com_ip_clk_wiz_6_0__ref_view_fileset</spirit:localName>
         </spirit:fileSetRef>
