@@ -40,14 +40,22 @@ setuptools.setup(
                 "resources/wasm_fpga_uart_header.vhd",
                 "resources/wasm_fpga_uart_direct.vhd",
                 "resources/wasm_fpga_uart_indirect.vhd",
+                "resources/wasm_fpga_uart_indirect.stm",
                 "resources/wasm_fpga_uart_wishbone.vhd",
             ],
         ),
         (
-            "wasm-fpga-uart/ip/WasmFpgaTestBenchRam",
-            ["ip/WasmFpgaTestBenchRam/WasmFpgaTestBenchRam.xci"],
+            "wasm-fpga-uart/ip/UartRxFifo",
+            ["ip/UartRxFifo/UartRxFifo.xci"],
         ),
-        ("wasm-fpga-uart/src", ["src/WasmFpgaUart.vhd"]),
+        (
+            "wasm-fpga-uart/src",
+            [
+                "src/WasmFpgaUart.vhd",
+                "src/uart_rx6.vhd",
+                "src/uart_tx6.vhd",
+            ]
+        ),
         (
             "wasm-fpga-uart/tb",
             [
@@ -56,8 +64,8 @@ setuptools.setup(
                 "tb/tb_pkg.vhd",
                 "tb/tb_std_logic_1164_additions.vhd",
                 "tb/tb_Types.vhd",
+                "tb/tb_UartModel.vhd",
                 "tb/tb_WasmFpgaUart.vhd",
-                "tb/tb_WbRam.vhd",
             ],
         ),
         ("wasm-fpga-uart", ["CHANGELOG.md", "AUTHORS", "LICENSE"]),
