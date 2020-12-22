@@ -1,0 +1,5 @@
+hxs_gen/
+src-gen/
+work/
+*.egg-info/
+dist/

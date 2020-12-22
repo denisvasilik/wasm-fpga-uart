@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <spirit:vendor>denisvasilik.com</spirit:vendor>
+  <spirit:library>denisvasilik</spirit:library>
+  <spirit:name>wasm_fpga_uart</spirit:name>
+  <spirit:version>1.0</spirit:version>
+  <spirit:busInterfaces>
+    <spirit:busInterface>
+      <spirit:name>clk</spirit:name>
+      <spirit:displayName>clk</spirit:displayName>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>CLK</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>Clk</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.CLK.FREQ_HZ">100000000</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>rst_n</spirit:name>
+      <spirit:displayName>rst_n</spirit:displayName>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RST</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>nRst</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>NUM_READ_OUTSTANDING</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.RST.NUM_READ_OUTSTANDING"/>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>NUM_WRITE_OUTSTANDING</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.RST.NUM_WRITE_OUTSTANDING"/>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>POLARITY</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.RST.POLARITY">ACTIVE_LOW</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>S_WB</spirit:name>
+      <spirit:displayName>S_WB</spirit:displayName>
+      <spirit:busType spirit:vendor="opencores.org" spirit:library="user" spirit:name="wishbone" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="opencores.org" spirit:library="user" spirit:name="wishbone_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>dat_w</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>DatIn</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>stb</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>Stb</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>dat_r</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>DatOut</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ack</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>Ack</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>sel</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>Sel</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>cyc</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>Cyc</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>adr</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>Adr</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>we</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>We</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+    </spirit:busInterface>
+  </spirit:busInterfaces>
+  <spirit:model>
+    <spirit:views>
+      <spirit:view>
+        <spirit:name>xilinx_xpgui</spirit:name>
+        <spirit:displayName>UI Layout</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:xgui.ui</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_xpgui_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>f92e9879</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>bd_tcl</spirit:name>
+        <spirit:displayName>Block Diagram</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:block.diagram</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>bd_tcl_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>647486e9</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_testbench</spirit:name>
+        <spirit:displayName>Test Bench</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:simulation.testbench</spirit:envIdentifier>
+        <spirit:modelName>tb_WasmFpgaStack</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_testbench_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>974064bc</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_anylanguagesynthesis</spirit:name>
+        <spirit:displayName>Synthesis</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:synthesis</spirit:envIdentifier>
+        <spirit:modelName>WasmFpgaStack</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagesynthesis_xilinx_com_ip_clk_wiz_6_0__ref_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagesynthesis_xilinx_com_ip_proc_sys_reset_5_0__ref_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagesynthesis_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>fe09854c</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_anylanguagebehavioralsimulation</spirit:name>
+        <spirit:displayName>Simulation</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:simulation</spirit:envIdentifier>
+        <spirit:modelName>WasmFpgaStack</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagebehavioralsimulation_xilinx_com_ip_clk_wiz_6_0__ref_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagebehavioralsimulation_xilinx_com_ip_proc_sys_reset_5_0__ref_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>fe09854c</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+    </spirit:views>
+    <spirit:ports>
+      <spirit:port>
+        <spirit:name>Clk</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>nRst</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>Adr</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">23</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>Sel</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">3</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>DatIn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>We</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>Stb</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>Cyc</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>DatOut</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>Ack</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>UartRx</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>UartTx</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+    </spirit:ports>
+  </spirit:model>
+  <spirit:fileSets>
+    <spirit:fileSet>
+      <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>xgui/wasm_fpga_uart_v1_0.tcl</spirit:name>
+        <spirit:fileType>tclSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_f92e9879</spirit:userFileType>
+        <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>bd_tcl_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>bd/bd.tcl</spirit:name>
+        <spirit:fileType>tclSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_testbench_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>../tb/tb_std_logic_1164_additions.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../tb/tb_pkg.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../tb/tb_pkg_helper.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../tb/tb_Types.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../tb/tb_FileIo.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../tb/tb_WasmFpgaUart.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagesynthesis_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>../ip/UartRxFifo/UartRxFifo.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../src/uart_rx6.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../src/WasmFpgaUart.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../src/uart_tx6.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../resources/wasm_fpga_uart_header.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../resources/wasm_fpga_uart_wishbone.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_cdaaa915</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagesynthesis_xilinx_com_ip_clk_wiz_6_0__ref_view_fileset</spirit:name>
+      <spirit:vendorExtensions>
+        <xilinx:subCoreRef>
+          <xilinx:componentRef xsi:type="xilinx:componentRefType" xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="clk_wiz" xilinx:version="6.0">
+            <xilinx:mode xilinx:name="create_mode"/>
+          </xilinx:componentRef>
+        </xilinx:subCoreRef>
+      </spirit:vendorExtensions>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagesynthesis_xilinx_com_ip_proc_sys_reset_5_0__ref_view_fileset</spirit:name>
+      <spirit:vendorExtensions>
+        <xilinx:subCoreRef>
+          <xilinx:componentRef xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="proc_sys_reset" xilinx:version="5.0">
+            <xilinx:mode xilinx:name="create_mode"/>
+          </xilinx:componentRef>
+        </xilinx:subCoreRef>
+      </spirit:vendorExtensions>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>../ip/UartRxFifo/UartRxFifo.xci</spirit:name>
+        <spirit:userFileType>xci</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../src/uart_rx6.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../src/WasmFpgaUart.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../src/uart_tx6.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../resources/wasm_fpga_uart_header.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../resources/wasm_fpga_uart_wishbone.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagebehavioralsimulation_xilinx_com_ip_clk_wiz_6_0__ref_view_fileset</spirit:name>
+      <spirit:vendorExtensions>
+        <xilinx:subCoreRef>
+          <xilinx:componentRef xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="clk_wiz" xilinx:version="6.0">
+            <xilinx:mode xilinx:name="create_mode"/>
+          </xilinx:componentRef>
+        </xilinx:subCoreRef>
+      </spirit:vendorExtensions>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagebehavioralsimulation_xilinx_com_ip_proc_sys_reset_5_0__ref_view_fileset</spirit:name>
+      <spirit:vendorExtensions>
+        <xilinx:subCoreRef>
+          <xilinx:componentRef xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="proc_sys_reset" xilinx:version="5.0">
+            <xilinx:mode xilinx:name="create_mode"/>
+          </xilinx:componentRef>
+        </xilinx:subCoreRef>
+      </spirit:vendorExtensions>
+    </spirit:fileSet>
+  </spirit:fileSets>
+  <spirit:description>WebAssembly UART IP</spirit:description>
+  <spirit:parameters>
+    <spirit:parameter>
+      <spirit:name>Component_Name</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">wasm_fpga_stack</spirit:value>
+    </spirit:parameter>
+  </spirit:parameters>
+  <spirit:vendorExtensions>
+    <xilinx:coreExtensions>
+      <xilinx:supportedFamilies>
+        <xilinx:family xilinx:lifeCycle="Pre-Production">artix7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Pre-Production">zynq</xilinx:family>
+      </xilinx:supportedFamilies>
+      <xilinx:taxonomies>
+        <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
+      </xilinx:taxonomies>
+      <xilinx:displayName>WebAssembly UART IP</xilinx:displayName>
+      <xilinx:coreRevision>25</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2020-12-22T09:03:10Z</xilinx:coreCreationDateTime>
+      <xilinx:tags>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5cbed84e_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19ee9aa4_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2534d7b9_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6d3d7a67_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2a3303f_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@27595ed8_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@40953a96_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3bf3bf9c_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b9b6e97_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@202a594e_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2f925636_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a33f386_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6af2afa3_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6c840ebe_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6324c754_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7f228080_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@40983cbe_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@250e2e5d_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1f15a36d_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6c436713_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1edf920c_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50d78b92_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e5d5101_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@47545fa9_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@54dc43be_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5925d339_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@260f524b_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@37d578dc_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2dd2a896_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7ae619a2_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@54b09b98_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a72bd23_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5669e4e9_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@d74553f_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@73d84181_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@10b40662_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@59c4cc64_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3946ef64_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2c774888_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@261fe0ca_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7815e92b_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@39ad5cb8_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-stack/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@c800154_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1f01ffb4_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@c27c0a5_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@22ee254d_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@273057b3_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4d9f750_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6ce101ce_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b8b3ed6_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7f5ecaea_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50c95bb2_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7a89e303_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@511a145_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@48181aa5_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a993bc5_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@790129c7_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@78735a1_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@71bfa38a_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@15554c26_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@61453ff1_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e8729f9_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@60947f7e_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6d4284b4_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2f212fca_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@205154e2_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@539d1179_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@31c86afe_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4644bcc1_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@649711f5_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1d9d00df_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b1f14ca_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e2a9894_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@28fd5bbe_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e76b9d3_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6e43a712_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@14329c26_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6b82b2d8_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@58ad28b_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2bffbd3d_ARCHIVE_LOCATION">/home/ubuntu-dev/git/webassembly/wasm-fpga-uart/package</xilinx:tag>
+      </xilinx:tags>
+    </xilinx:coreExtensions>
+    <xilinx:packagingInfo>
+      <xilinx:xilinxVersion>2019.2</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="1ea0cf6e"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="dfdd3694"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="d1e8a832"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="0fa54017"/>
+    </xilinx:packagingInfo>
+  </spirit:vendorExtensions>
+</spirit:component>
