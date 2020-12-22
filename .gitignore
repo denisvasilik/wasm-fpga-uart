@@ -3,3 +3,6 @@ src-gen/
 work/
 *.egg-info/
 dist/
+ip/
+!ip/**/*.xci
+
