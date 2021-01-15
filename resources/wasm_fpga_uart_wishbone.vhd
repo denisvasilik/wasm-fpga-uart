@@ -33,7 +33,7 @@ entity UartBlk_WasmFpgaUart is
         UartRxBusy : in std_logic;
         UartTxBusy : in std_logic;
         TxDataByte : out std_logic_vector(7 downto 0);
-        RxDataByte : out std_logic_vector(7 downto 0)
+        RxDataByte : in std_logic_vector(7 downto 0)
      );
 end UartBlk_WasmFpgaUart;
 
@@ -76,7 +76,6 @@ architecture arch_for_synthesys of UartBlk_WasmFpgaUart is
     signal WReg_UartRxRun : std_logic;
     signal WReg_UartTxRun : std_logic;
     signal WReg_TxDataByte : std_logic_vector(7 downto 0);
-    signal WReg_RxDataByte : std_logic_vector(7 downto 0);
 
 begin 
 
@@ -225,7 +224,7 @@ begin
             )
     begin 
          PreMuxDatOut_StatusReg <= x"0000_0000";
-         PreMuxDatOut_StatusReg(1) <= UartRxDataPresent;
+         PreMuxDatOut_StatusReg(2) <= UartRxDataPresent;
          PreMuxDatOut_StatusReg(1) <= UartRxBusy;
          PreMuxDatOut_StatusReg(0) <= UartTxBusy;
     end process;
@@ -299,28 +298,22 @@ begin
     begin 
         if (Rst = '1') then 
             PreMuxAck_RxDataReg <= '0';
-            WReg_RxDataByte <= "00000000";
         elsif rising_edge(Clk) then
             PreMuxAck_RxDataReg <= WriteDiff_RxDataReg or ReadDiff_RxDataReg; 
-            if (WriteDiff_RxDataReg = '1') then
-                if (Sel(0) = '1') then WReg_RxDataByte(7 downto 0) <= DatIn(7 downto 0); end if;
-            else
-            end if;
         end if;
     end process;
 
     mux_premuxdatout_RxDataReg0 : process (
-            WReg_RxDataByte
+            RxDataByte
             )
     begin 
          PreMuxDatOut_RxDataReg <= x"0000_0000";
-         PreMuxDatOut_RxDataReg(7 downto 0) <= WReg_RxDataByte;
+         PreMuxDatOut_RxDataReg(7 downto 0) <= RxDataByte;
     end process;
 
 
 
 
-    RxDataByte <= WReg_RxDataByte;
 
 
 end architecture;
@@ -373,7 +366,7 @@ architecture arch_for_synthesys of WasmFpgaUartWshBn is
             UartRxBusy : in std_logic;
             UartTxBusy : in std_logic;
             TxDataByte : out std_logic_vector(7 downto 0);
-            RxDataByte : out std_logic_vector(7 downto 0)
+            RxDataByte : in std_logic_vector(7 downto 0)
          );
     end component; 
 
@@ -411,7 +404,7 @@ begin
         UartRxBusy => UartBlk_WasmFpgaUartWshBn.UartRxBusy,
         UartTxBusy => UartBlk_WasmFpgaUartWshBn.UartTxBusy,
         TxDataByte => WasmFpgaUartWshBn_UartBlk.TxDataByte,
-        RxDataByte => WasmFpgaUartWshBn_UartBlk.RxDataByte
+        RxDataByte => UartBlk_WasmFpgaUartWshBn.RxDataByte
      );
 
 

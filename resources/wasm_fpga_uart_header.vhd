@@ -105,7 +105,6 @@ package WasmFpgaUartWshBn_Package is
         UartTxRun :   std_logic;
         WRegPulse_ControlReg :   std_logic;
         TxDataByte :   std_logic_vector(7 downto 0);
-        RxDataByte :   std_logic_vector(7 downto 0);
     end record;
 
     type array_of_T_WasmFpgaUartWshBn_UartBlk is
@@ -117,6 +116,7 @@ package WasmFpgaUartWshBn_Package is
         UartRxDataPresent :   std_logic;
         UartRxBusy :   std_logic;
         UartTxBusy :   std_logic;
+        RxDataByte :   std_logic_vector(7 downto 0);
     end record;
 
     type array_of_T_UartBlk_WasmFpgaUartWshBn is
@@ -158,7 +158,7 @@ package WasmFpgaUartWshBn_Package is
         constant WASMFPGAUART_ADR_StatusReg                                                          : std_logic_vector(23 downto 0) := std_logic_vector(x"000004" + unsigned(WASMFPGAUART_ADR_BLK_BASE_UartBlk));
 
             -- 
-            constant WASMFPGAUART_BUS_MASK_UartRxDataPresent                                         : std_logic_vector(31 downto 0) := x"00000002";
+            constant WASMFPGAUART_BUS_MASK_UartRxDataPresent                                         : std_logic_vector(31 downto 0) := x"00000004";
 
                 -- UART RX data is not present.
                 constant WASMFPGAUART_VAL_RxDataIsNotPresent                                         : std_logic := '0';

@@ -45,12 +45,12 @@ LABEL
         DEFINE_CONST UARTBLK_ADR_StatusReg                                                            #x00000004
         ADD_CONST UARTBLK_ADR_StatusReg                                                               $WASMFPGAUART_ADR_BLK_BASE_UARTBLK
 
-            DEFINE_CONST UARTBLK_BUS_MASK_UartRxDataPresent                                           #x00000002
+            DEFINE_CONST UARTBLK_BUS_MASK_UartRxDataPresent                                           #x00000004
 
 
                 DEFINE_CONST UARTBLK_VAL_RxDataIsNotPresent                                           #x00000000
 
-                DEFINE_CONST UARTBLK_VAL_RxDataIsPresent                                              #x00000002
+                DEFINE_CONST UARTBLK_VAL_RxDataIsPresent                                              #x00000004
 
 
             DEFINE_CONST UARTBLK_BUS_MASK_UartRxBusy                                                  #x00000002
@@ -127,9 +127,8 @@ VERIFY_FPGA 32 $UARTBLK_ADR_ControlReg WasmFpgaUartvalRstRead #x00000000 #x00000
 -- RW : TxDataReg
 VERIFY_FPGA 32 $UARTBLK_ADR_TxDataReg WasmFpgaUartvalRstRead #x00000000 #x000000FF -- TxDataByte
 
--- RW : RxDataReg
-VERIFY_FPGA 32 $UARTBLK_ADR_RxDataReg WasmFpgaUartvalRstRead #x00000000 #x000000FF -- RxDataByte
-
+-- R : RxDataReg
+--     RxDataByte
 
 RETURN_CALL
 END_SUB
@@ -184,12 +183,8 @@ VERIFY_FPGA 32 $UARTBLK_ADR_TxDataReg WasmFpgaUartvalRdBkRead #x00000055 #x00000
 WRITE_FPGA  32 $UARTBLK_ADR_TxDataReg #x000000AA          -- TxDataByte
 VERIFY_FPGA 32 $UARTBLK_ADR_TxDataReg WasmFpgaUartvalRdBkRead #x000000AA #x000000FF -- TxDataByte
 
--- RW : RxDataReg
-WRITE_FPGA  32 $UARTBLK_ADR_RxDataReg #x00000055          -- RxDataByte
-VERIFY_FPGA 32 $UARTBLK_ADR_RxDataReg WasmFpgaUartvalRdBkRead #x00000055 #x000000FF -- RxDataByte
-WRITE_FPGA  32 $UARTBLK_ADR_RxDataReg #x000000AA          -- RxDataByte
-VERIFY_FPGA 32 $UARTBLK_ADR_RxDataReg WasmFpgaUartvalRdBkRead #x000000AA #x000000FF -- RxDataByte
-
+-- R : RxDataReg
+--     RxDataByte
 
 RETURN_CALL
 END_SUB

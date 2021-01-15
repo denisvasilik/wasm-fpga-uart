@@ -92,6 +92,7 @@ begin
     UartBlk_Wsh.UartTxBusy <= '0';
     -- TxDataReg  
     -- RxDataReg  
+    UartBlk_Wsh.RxDataByte <= (others => '0');
 
 
 
