@@ -7,4 +7,18 @@ proc init_gui { IPINST } {
 
 }
 
+proc update_PARAM_VALUE.ClockCycles { PARAM_VALUE.ClockCycles } {
+	# Procedure called to update ClockCycles when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.ClockCycles { PARAM_VALUE.ClockCycles } {
+	# Procedure called to validate ClockCycles
+	return true
+}
+
+
+proc update_MODELPARAM_VALUE.ClockCycles { MODELPARAM_VALUE.ClockCycles PARAM_VALUE.ClockCycles } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.ClockCycles}] ${MODELPARAM_VALUE.ClockCycles}
+}
 
