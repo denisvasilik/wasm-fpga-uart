@@ -131,8 +131,8 @@ HwSwIf WasmFpgaUart {
                 HwAckImmediate = 'Yes';
             }
             Bits {
-                BitFieldReserved ( 31 downto 2 );
-                BitFieldEnum UartRxDataPresent ( 1 ) 'R_RTrans' {
+                BitFieldReserved ( 31 downto 3 );
+                BitFieldEnum UartRxDataPresent ( 2 ) 'R_RTrans' {
                     BitFieldDescription { ""; }
                     ValueEntries {
                         Value { 0b0 = RxDataIsNotPresent ValueDescription { "UART RX data is not present."; } }
@@ -203,7 +203,7 @@ HwSwIf WasmFpgaUart {
             }
             Bits {
                 BitFieldReserved ( 31 downto 8 );
-                BitFieldData RxDataByte ( 7 downto 0 ) 'RW_WReg_RLoopBack' {
+                BitFieldData RxDataByte ( 7 downto 0 ) 'R_RTrans' {
                     BitFieldDescription { "UART RX data byte"; }
                     ResetValueEntry = 0b0;
                     BlockResetsAffecting {
