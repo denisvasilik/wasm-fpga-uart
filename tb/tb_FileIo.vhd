@@ -22,7 +22,9 @@ entity tb_FileIo is
     Clk : in std_logic;
     Rst : in std_logic;
     WasmFpgaUart_FileIo : in T_WasmFpgaUart_FileIo;
-    FileIo_WasmFpgaUart : out T_FileIo_WasmFpgaUart
+    FileIo_WasmFpgaUart : out T_FileIo_WasmFpgaUart;
+    UartModel_FileIo : in T_UartModel_FileIo;
+    FileIo_UartModel : out T_FileIo_UartModel
   );
 end tb_FileIo;
 
@@ -226,6 +228,8 @@ begin
     begin  -- process Read_file
 
         wb_data_write <= (others => '0');
+
+        FileIo_UartModel.UartTxRun <= '0';
 
         -----------------------------------------------------------------------
         --           Stimulus file instruction definition
@@ -879,8 +883,12 @@ begin
             --  par1  0  signal number
             --  par2  1  signal value
             elsif (instruction(1 to len) = "SET_SIG") then
-                if (par1 = 16) then
-
+                if (par1 = 0) then
+                    if (par2 = 1) then
+                        FileIo_UartModel.UartTxRun <= '1';
+                    else
+                        FileIo_UartModel.UartTxRun <= '0';
+                    end if;
                 else
                     assert (false)
                     report " Line " & (integer'image(file_line)) & ", " & instruction(1 to len) & ": Signal not defined"

@@ -20,6 +20,16 @@ package tb_Types is
         Cyc : std_logic_vector(0 downto 0);
     end record;
 
+    type T_FileIo_UartModel is
+    record
+        UartTxRun : std_logic;
+    end record;
+
+    type T_UartModel_FileIo is
+    record
+        UartTxBusy : std_logic;
+    end record;
+
 end package;
 
 package body tb_Types is

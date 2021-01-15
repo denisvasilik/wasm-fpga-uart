@@ -24,6 +24,9 @@ architecture behavioural of tb_WasmFpgaUart is
     signal WasmFpgaUart_FileIo : T_WasmFpgaUart_FileIo;
     signal FileIo_WasmFpgaUart : T_FileIo_WasmFpgaUart;
 
+    signal UartModel_FileIo : T_UartModel_FileIo;
+    signal FileIo_UartModel : T_FileIo_UartModel;
+
     signal UartRx : std_logic := '0';
     signal UartTx : std_logic := '0';
 
@@ -54,7 +57,9 @@ begin
             Clk => Clk100M,
             Rst => Rst,
             WasmFpgaUart_FileIo => WasmFpgaUart_FileIo,
-            FileIo_WasmFpgaUart => FileIo_WasmFpgaUart
+            FileIo_WasmFpgaUart => FileIo_WasmFpgaUart,
+            UartModel_FileIo => UartModel_FileIo,
+            FileIo_UartModel => FileIo_UartModel
         );
 
     WasmFpgaUart_i : entity work.WasmFpgaUart
@@ -72,5 +77,14 @@ begin
             UartRx => UartRx,
             UartTx => UartTx
        );
+
+    tb_UartModel_i : entity work.tb_UartModel
+    port map (
+        Clk => Clk100M,
+        Rst => Rst,
+        UartTxRun => FileIo_UartModel.UartTxRun,
+        UartTxBusy => UartModel_FileIo.UartTxBusy,
+        UartTx => UartRx
+    );
 
 end;

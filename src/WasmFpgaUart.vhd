@@ -147,7 +147,7 @@ architecture WasmFpgaUartDefault of WasmFpgaUart is
         UartRxBusy : in std_logic;
         UartTxBusy : in std_logic;
         TxDataByte : out std_logic_vector(7 downto 0);
-        RxDataByte : out std_logic_vector(7 downto 0)
+        RxDataByte : in std_logic_vector(7 downto 0)
     );
   end component;
 
@@ -259,7 +259,7 @@ begin
         else
             if( UartReceiverState = UartReceiverState0 ) then
                 UartRxBusy <= '0';
-                if( UartRxRun = '1' ) then
+                if( ControlRegPulse = '1' and UartRxRun = '1' ) then
                     UartRxBusy <= '1';
                     FifoReadEnable <= '1';
                     UartReceiverState <= to_unsigned(UartReceiverState1, UartReceiverState'LENGTH);
