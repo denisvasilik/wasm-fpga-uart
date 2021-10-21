@@ -30,45 +30,46 @@ setuptools.setup(
     dependency_links=[],
     package_dir={},
     package_data={},
-    data_files=[
-        ("wasm-fpga-uart/package", ["package/component.xml"]),
-        ("wasm-fpga-uart/package/bd", ["package/bd/bd.tcl"]),
-        ("wasm-fpga-uart/package/xgui", ["package/xgui/wasm_fpga_uart_v1_0.tcl"]),
-        (
-            "wasm-fpga-uart/resources",
-            [
-                "resources/wasm_fpga_uart_header.vhd",
-                "resources/wasm_fpga_uart_direct.vhd",
-                "resources/wasm_fpga_uart_indirect.vhd",
-                "resources/wasm_fpga_uart_indirect.stm",
-                "resources/wasm_fpga_uart_wishbone.vhd",
-            ],
-        ),
-        (
-            "wasm-fpga-uart/ip/UartRxFifo",
-            ["ip/UartRxFifo/UartRxFifo.xci"],
-        ),
-        (
-            "wasm-fpga-uart/src",
-            [
-                "src/WasmFpgaUart.vhd",
-                "src/uart_rx6.vhd",
-                "src/uart_tx6.vhd",
-            ]
-        ),
-        (
-            "wasm-fpga-uart/tb",
-            [
-                "tb/tb_FileIo.vhd",
-                "tb/tb_pkg_helper.vhd",
-                "tb/tb_pkg.vhd",
-                "tb/tb_std_logic_1164_additions.vhd",
-                "tb/tb_Types.vhd",
-                "tb/tb_UartModel.vhd",
-                "tb/tb_WasmFpgaUart.vhd",
-            ],
-        ),
-        ("wasm-fpga-uart", ["CHANGELOG.md", "AUTHORS", "LICENSE"]),
+    data_files=[(
+        "wasm-fpga-uart/package", [
+            "package/component.xml"
+        ]),(
+        "wasm-fpga-uart/package/bd", [
+            "package/bd/bd.tcl"
+        ]),(
+        "wasm-fpga-uart/package/xgui", [
+            "package/xgui/wasm_fpga_uart_v1_0.tcl"
+        ]),(
+        "wasm-fpga-uart/resources", [
+            "resources/wasm_fpga_uart_header.vhd",
+            "resources/wasm_fpga_uart_wishbone.vhd",
+        ]),(
+        "wasm-fpga-uart/ip/UartRxFifo", [
+            "ip/UartRxFifo/UartRxFifo.xci"
+        ]),(
+        "wasm-fpga-uart/src", [
+            "src/WasmFpgaUart.vhd",
+            "src/uart_rx6.vhd",
+            "src/uart_tx6.vhd",
+        ]),(
+        "wasm-fpga-uart/tb", [
+            "tb/tb_FileIo.vhd",
+            "tb/tb_pkg_helper.vhd",
+            "tb/tb_pkg.vhd",
+            "tb/tb_std_logic_1164_additions.vhd",
+            "tb/tb_Types.vhd",
+            "tb/tb_UartModel.vhd",
+            "tb/tb_WasmFpgaUart.vhd",
+        ]),(
+        'wasm-fpga-uart/simstm', [
+            'simstm/Defines.stm',
+            'simstm/WasmFpgaUart.stm',
+        ]),(
+        "wasm-fpga-uart", [
+            "CHANGELOG.md",
+            "AUTHORS",
+            "LICENSE"
+        ])
     ],
     setup_requires=[],
     install_requires=[],
